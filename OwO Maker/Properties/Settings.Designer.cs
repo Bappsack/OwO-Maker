@@ -82,5 +82,17 @@ namespace OwO_Maker.Properties {
                 this["ProdKey"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public uint LastMinigame {
+            get {
+                return ((uint)(this["LastMinigame"]));
+            }
+            set {
+                this["LastMinigame"] = value;
+            }
+        }
     }
 }

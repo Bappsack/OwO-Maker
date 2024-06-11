@@ -264,7 +264,6 @@ namespace OwO_Maker
 
         private void button2_Click(object sender, EventArgs e)
         {
-
             if (BotList.Count == 0)
             {
                 MessageBox.Show("No Bots Added!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -332,6 +331,22 @@ namespace OwO_Maker
                     Properties.Settings.Default.ProdKey = ProductionCouponKey.Text;
             }
 
+            uint lastMinigame = 0;
+            if (StoneQuarry.Checked)
+                lastMinigame = 0;
+            else if (SawMill.Checked)
+                lastMinigame = 1;
+            else if (ShootingRange.Checked)
+                lastMinigame = 2;
+            else if (FishPond.Checked)
+                lastMinigame = 3;
+            else if (TypeWriter.Checked)
+                lastMinigame = 4;
+            else if (Memory.Checked)
+                lastMinigame = 5;
+
+            Properties.Settings.Default.LastMinigame = lastMinigame;
+
             Properties.Settings.Default.Save();
         }
 
@@ -349,6 +364,31 @@ namespace OwO_Maker
 
                 if (check >= 0 && check < 10)
                     ProductionCouponKey.Text = Properties.Settings.Default.ProdKey;
+            }
+
+            switch (Properties.Settings.Default.LastMinigame)
+            {
+                case 0:
+                    StoneQuarry.Checked = true;
+                    break;
+                case 1:
+                    SawMill.Checked = true;
+                    break;
+                case 2:
+                    ShootingRange.Checked = true;
+                    break;
+                case 3:
+                    FishPond.Checked = true;
+                    break;
+                case 4:
+                    TypeWriter.Checked = true;
+                    break;
+                case 5:
+                    Memory.Checked = true;
+                    break;
+                default:
+                    StoneQuarry.Checked = true;
+                    break;
             }
         }
 

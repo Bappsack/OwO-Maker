@@ -130,11 +130,6 @@ namespace OwO_Maker.Helpers
             return null;
         }
 
-        public static bool IsMessageBoxOpen(Mem mem, IntPtr TMessageBoxWidget)
-        {
-            return mem.ReadMemory<byte>(TMessageBoxWidget + Structs.TMessageBoxWidget.MessageJmp) == 1;
-        }
-
         public static bool IsMinigameUseWidgetVisible(Mem mem, IntPtr TArrowWidget)
         {
             return mem.ReadMemory<byte>(TArrowWidget + Structs.TArrowWidget.ArrowJmp1, [Structs.TArrowWidget.ArrowJmp2 + (8 * Structs.TArrowWidget.GapSize)]) == 1;
