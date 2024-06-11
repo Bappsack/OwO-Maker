@@ -153,7 +153,6 @@
             ProductionCouponKey.Size = new System.Drawing.Size(34, 23);
             ProductionCouponKey.TabIndex = 13;
             ProductionCouponKey.Text = "5";
-            ProductionCouponKey.SelectedIndexChanged += ProductionCouponKey_SelectedIndexChanged;
             // 
             // HumanTime
             // 
@@ -372,7 +371,6 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Main";
             tabPage1.UseVisualStyleBackColor = true;
-            tabPage1.Click += tabPage1_Click;
             // 
             // tabPage2
             // 
@@ -420,7 +418,7 @@
             // columnHeader2
             // 
             columnHeader2.Text = "Minigame";
-            columnHeader2.Width = 80;
+            columnHeader2.Width = 90;
             // 
             // columnHeader7
             // 
@@ -435,7 +433,7 @@
             // columnHeader5
             // 
             columnHeader5.Text = "Prod Points";
-            columnHeader5.Width = 80;
+            columnHeader5.Width = 75;
             // 
             // columnHeader3
             // 
@@ -445,12 +443,11 @@
             // columnHeader6
             // 
             columnHeader6.Text = "Human Time";
-            columnHeader6.Width = 85;
+            columnHeader6.Width = 83;
             // 
             // columnHeader8
             // 
             columnHeader8.Text = "Progress";
-            columnHeader8.Width = 75;
             // 
             // button2
             // 
@@ -469,8 +466,10 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(631, 316);
             Controls.Add(tabControl1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            MaximizeBox = false;
             Name = "Form1";
             Text = "OwO Maker";
             FormClosed += Form_Closed;

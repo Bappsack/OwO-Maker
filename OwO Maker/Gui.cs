@@ -396,15 +396,5 @@ namespace OwO_Maker
         {
             Process.Start("https://www.elitepvpers.com/forum/nostale-hacks-bots-cheats-exploits/4716766-OwO-maker-nostale-minigame-bot-source-poc.html");
         }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ProductionCouponKey_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
