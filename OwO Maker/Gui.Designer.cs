@@ -33,7 +33,7 @@
             listBox1 = new System.Windows.Forms.ListBox();
             groupBox1 = new System.Windows.Forms.GroupBox();
             groupBox4 = new System.Windows.Forms.GroupBox();
-            t_random_min = new System.Windows.Forms.TextBox();
+            t_FailChance = new System.Windows.Forms.TextBox();
             ProductionCouponKey = new System.Windows.Forms.ComboBox();
             HumanTime = new System.Windows.Forms.CheckBox();
             t_Times = new System.Windows.Forms.TextBox();
@@ -114,7 +114,7 @@
             // 
             // groupBox4
             // 
-            groupBox4.Controls.Add(t_random_min);
+            groupBox4.Controls.Add(t_FailChance);
             groupBox4.Controls.Add(ProductionCouponKey);
             groupBox4.Controls.Add(HumanTime);
             groupBox4.Controls.Add(t_Times);
@@ -134,20 +134,20 @@
             groupBox4.TabStop = false;
             groupBox4.Text = "Play Settings";
             // 
-            // t_random_min
+            // t_FailChance
             // 
-            t_random_min.Location = new System.Drawing.Point(101, 115);
-            t_random_min.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            t_random_min.Name = "t_random_min";
-            t_random_min.Size = new System.Drawing.Size(32, 23);
-            t_random_min.TabIndex = 12;
-            t_random_min.Text = "0";
+            t_FailChance.Location = new System.Drawing.Point(100, 84);
+            t_FailChance.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            t_FailChance.Name = "t_FailChance";
+            t_FailChance.Size = new System.Drawing.Size(32, 23);
+            t_FailChance.TabIndex = 12;
+            t_FailChance.Text = "0";
             // 
             // ProductionCouponKey
             // 
             ProductionCouponKey.FormattingEnabled = true;
             ProductionCouponKey.Items.AddRange(new object[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" });
-            ProductionCouponKey.Location = new System.Drawing.Point(159, 84);
+            ProductionCouponKey.Location = new System.Drawing.Point(159, 113);
             ProductionCouponKey.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ProductionCouponKey.Name = "ProductionCouponKey";
             ProductionCouponKey.Size = new System.Drawing.Size(34, 23);
@@ -158,7 +158,7 @@
             // HumanTime
             // 
             HumanTime.AutoSize = true;
-            HumanTime.Location = new System.Drawing.Point(5, 148);
+            HumanTime.Location = new System.Drawing.Point(5, 141);
             HumanTime.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             HumanTime.Name = "HumanTime";
             HumanTime.Size = new System.Drawing.Size(95, 19);
@@ -179,7 +179,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            label8.Location = new System.Drawing.Point(139, 119);
+            label8.Location = new System.Drawing.Point(132, 86);
             label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(19, 16);
@@ -190,7 +190,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            label3.Location = new System.Drawing.Point(118, 87);
+            label3.Location = new System.Drawing.Point(118, 117);
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(33, 16);
@@ -234,7 +234,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            label9.Location = new System.Drawing.Point(6, 117);
+            label9.Location = new System.Drawing.Point(5, 86);
             label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label9.Name = "label9";
             label9.Size = new System.Drawing.Size(84, 16);
@@ -244,7 +244,7 @@
             // ProductionCoupon
             // 
             ProductionCoupon.AutoSize = true;
-            ProductionCoupon.Location = new System.Drawing.Point(5, 84);
+            ProductionCoupon.Location = new System.Drawing.Point(5, 116);
             ProductionCoupon.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ProductionCoupon.Name = "ProductionCoupon";
             ProductionCoupon.Size = new System.Drawing.Size(105, 19);
@@ -519,7 +519,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox t_random_min;
+        private System.Windows.Forms.TextBox t_FailChance;
         private System.Windows.Forms.RadioButton Memory;
         private System.Windows.Forms.RadioButton TypeWriter;
         private System.Windows.Forms.ColumnHeader columnHeader5;

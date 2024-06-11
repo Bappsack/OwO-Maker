@@ -23,7 +23,7 @@ namespace OwO_Maker.Minigames
             var TMiniGamePoints = mem.ReadMemory<IntPtr>(mem.FindPattern(Structs.Pattern.TMiniGamePoints) + 1, [0x0]);
             var TArrowWidget = mem.ReadMemory<IntPtr>(mem.FindPattern(Structs.Pattern.TArrowWidget) + 1, [0x0]);
 
-            var requiredPoints = SharedRoutines.GetRequiredPoints(Structs.Minigame.FishingPond, level) + 100; // Add additional 100 in case we lose enough
+            var requiredPoints = SharedRoutines.GetRequiredPoints(Structs.Minigame.ShootingRange, level);
 
             var Fail = SharedRoutines.CalculateFailChance(FailChance, new Random().NextDouble());
 
@@ -52,7 +52,7 @@ namespace OwO_Maker.Minigames
 
                     var leftChickenPaddleData = mem.ReadMemoryData(currentMiniGame + Structs.ShootingRange.ChickenLeftPaddle, [Structs.TimingShotGame.Data, 0x0], 500);
                     var rightChickenPaddleData = mem.ReadMemoryData(currentMiniGame + Structs.ShootingRange.ChickenRightPaddle, [Structs.TimingShotGame.Data, 0x0], 500);
-                    var leftBatPaddleData = mem.ReadMemoryData(currentMiniGame + Structs.ShootingRange.BatRightPaddle, [Structs.TimingShotGame.Data, 0x0], 500);
+                    var leftBatPaddleData = mem.ReadMemoryData(currentMiniGame + Structs.ShootingRange.BatLeftPaddle, [Structs.TimingShotGame.Data, 0x0], 500);
                     var rightBatPaddleData = mem.ReadMemoryData(currentMiniGame + Structs.ShootingRange.BatRightPaddle, [Structs.TimingShotGame.Data, 0x0], 500);
                     var leftRoosterPaddleData = mem.ReadMemoryData(currentMiniGame + Structs.ShootingRange.RoosterLeftPaddle, [Structs.TimingShotGame.Data, 0x0], 500);
                     var rightRoosterPaddleData = mem.ReadMemoryData(currentMiniGame + Structs.ShootingRange.RoosterRightPaddle, [Structs.TimingShotGame.Data, 0x0], 500);
@@ -65,6 +65,12 @@ namespace OwO_Maker.Minigames
 
                     if (status is Structs.Status.Playing)
                     {
+                        if (Fail && points >= requiredPoints / 2)
+                        {
+                            await Task.Delay(100);
+                            continue;
+                        }
+
                         for (nint i = 478; i != (478 - firstHitBox); i--)
                         {
                             if (leftChickenPaddleData[i] > 0 || leftBatPaddleData[i] > 0 || leftRoosterPaddleData[i] > 0)
@@ -72,7 +78,7 @@ namespace OwO_Maker.Minigames
                                 if (points < requiredPoints)
                                 {
                                     await BackgroundHelper.SendKey(hWnd, BackgroundHelper.KeyCodes.VK_LEFT, 0);
-                                    await Task.Delay(2);
+                                    await Task.Delay(10);
                                     break;
                                 }
                             }
@@ -82,7 +88,7 @@ namespace OwO_Maker.Minigames
                                 if (points < requiredPoints)
                                 {
                                     await BackgroundHelper.SendKey(hWnd, BackgroundHelper.KeyCodes.VK_RIGHT, 0);
-                                    await Task.Delay(2);
+                                    await Task.Delay(10);
                                     break;
                                 }
                             }
@@ -101,7 +107,7 @@ namespace OwO_Maker.Minigames
                         if (FailChance > 0)
                             Fail = SharedRoutines.CalculateFailChance(FailChance, new Random().NextDouble());
 
-                        await Task.Delay(1_500 + new Random().Next(0, 100));
+                        await Task.Delay(1_000 + new Random().Next(0, 100));
 
                         if (points >= requiredPoints && status is Structs.Status.GameEnd or Structs.Status.GameEnded1 or Structs.Status.GameEnded2)
                         {

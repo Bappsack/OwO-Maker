@@ -24,7 +24,7 @@ namespace OwO_Maker.Minigames
             var TMiniGamePoints = mem.ReadMemory<IntPtr>(mem.FindPattern(Pattern.TMiniGamePoints) + 1, [0x0]);
             var TArrowWidget = mem.ReadMemory<IntPtr>(mem.FindPattern(Pattern.TArrowWidget) + 1, [0x0]);
 
-            var requiredPoints = SharedRoutines.GetRequiredPoints(Minigame.FishingPond, level) + 100; // Add additional 100 in case we lose enough
+            var requiredPoints = SharedRoutines.GetRequiredPoints(Minigame.SawMill, level) + 100; // Add additional 100 in case we lose enough
 
             var Fail = SharedRoutines.CalculateFailChance(FailChance, new Random().NextDouble());
 
@@ -61,7 +61,13 @@ namespace OwO_Maker.Minigames
 
                     if (status is Status.Playing)
                     {
-                        for (int i = leftPaddleData.Length - 1; i != (HumanTime && combo is 9 ? 397 - firstHitBox + 25 : 327) ; i--)
+                        if (Fail && points >= requiredPoints / 2)
+                        {
+                            await Task.Delay(100);
+                            continue;
+                        }
+
+                        for (int i = leftPaddleData.Length - 1; i != (HumanTime && combo is >= 3 ? 397 - firstHitBox + 25 : 327); i--)
                         {
                             if (leftPaddleData[i] == 1 && points < requiredPoints)
                             {
@@ -83,7 +89,7 @@ namespace OwO_Maker.Minigames
                         if (FailChance > 0)
                             Fail = SharedRoutines.CalculateFailChance(FailChance, new Random().NextDouble());
 
-                        await Task.Delay(1_500 + new Random().Next(0, 100));
+                        await Task.Delay(1_000 + new Random().Next(0, 100));
 
                         if (points >= requiredPoints && status is Status.GameEnd or Status.GameEnded1 or Status.GameEnded2)
                         {

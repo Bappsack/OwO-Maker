@@ -56,7 +56,7 @@ namespace OwO_Maker
             if (text.Contains("NosTale"))
             {
                 GetWindowRect(hWnd, out var tempRect);
-                if (tempRect.Right > 0 && tempRect.Bottom > 0)
+                if (tempRect.Right != 0 && tempRect.Bottom != 0)
                 {
                     this.HWndList.Insert(0, hWnd);
                     this.listBox1.Items.Insert(0, "NosTale - (" + hWnd.ToString() + ")");
@@ -148,11 +148,22 @@ namespace OwO_Maker
                 return;
             }
 
-            if (!t_random_min.Text.All(Char.IsDigit) && Convert.ToInt32(t_random_min.Text) > 0)
+            if (!t_FailChance.Text.All(Char.IsDigit))
             {
-                if (Convert.ToInt32(t_random_min.Text) <= 100)
+                MessageBox.Show("Invalid Number for Random Fail Min!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (t_FailChance.Text.All(Char.IsDigit))
+            {
+                var digit = Convert.ToInt32(t_FailChance.Text);
+                if (digit < 0 || digit > 100)
                 {
                     MessageBox.Show("Invalid Number for Random Fail Min!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else if (digit == 100)
+                {
+                    MessageBox.Show("a Fail Chance of 100 will result into failing everytime!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }
@@ -165,7 +176,7 @@ namespace OwO_Maker
             string Title = listBox1.SelectedItem.ToString();
             int Amount = Convert.ToInt32(t_Times.Text);
             int Level = Convert.ToInt32(t_Level.Text);
-            int failchance = Convert.ToInt32(t_random_min.Text);
+            int failchance = Convert.ToInt32(t_FailChance.Text);
             uint prodkey = GetProdKey(ProductionCouponKey.Text);
 
             if (prodkey == 0)
@@ -309,8 +320,8 @@ namespace OwO_Maker
             Properties.Settings.Default.HumanTime = HumanTime.Checked;
             Properties.Settings.Default.UseProdCoupon = ProductionCoupon.Checked;
 
-            if (t_random_min.Text.All(Char.IsDigit) && Convert.ToInt32(t_random_min.Text) <= 100 && Convert.ToInt32(t_random_min.Text) > 0)
-                Properties.Settings.Default.FailChance = t_random_min.Text;
+            if (t_FailChance.Text.All(Char.IsDigit) && Convert.ToInt32(t_FailChance.Text) <= 100 && Convert.ToInt32(t_FailChance.Text) > 0)
+                Properties.Settings.Default.FailChance = t_FailChance.Text;
 
 
             if (ProductionCouponKey.Text.All(Char.IsDigit))
@@ -330,7 +341,7 @@ namespace OwO_Maker
             ProductionCoupon.Checked = Properties.Settings.Default.UseProdCoupon;
 
             if (Properties.Settings.Default.FailChance.All(Char.IsDigit) && Convert.ToInt32(Properties.Settings.Default.FailChance) <= 100 && Convert.ToInt32(Properties.Settings.Default.FailChance) > 0)
-                t_random_min.Text = Properties.Settings.Default.FailChance;
+                t_FailChance.Text = Properties.Settings.Default.FailChance;
 
             if (Properties.Settings.Default.ProdKey.All(Char.IsDigit))
             {

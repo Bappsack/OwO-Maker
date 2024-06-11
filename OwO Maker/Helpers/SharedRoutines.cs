@@ -12,9 +12,9 @@ namespace OwO_Maker.Helpers
     {
         public static bool CalculateFailChance(int failChance, double rand)
         {
-            double chance = (double)failChance / 10;
+            double chance = failChance / 100.0;
 
-            return !(rand < chance);
+            return chance > rand;
         }
 
         public static async Task CollectReward(Mem mem, IntPtr TMiniGamePoints, int playedGames, int Amount, IntPtr hWnd, ButtonResolution buttons, int Level)
@@ -34,7 +34,7 @@ namespace OwO_Maker.Helpers
                 await Task.Delay(500 + new Random().Next(0, 100));
 
                 await BackgroundHelper.SendClick(hWnd, buttons.GameStart.X, buttons.GameStart.Y, 250);
-                await Task.Delay(500 + new Random().Next(0, 100));
+                await Task.Delay(1_500 + new Random().Next(0, 100));
             }
         }
 
