@@ -6,6 +6,7 @@ The spiritual successor of [UwU Maker](https://github.com/Bappsack/UwU-Maker).
 
 - using bots is never 100% safe! Use it at your own risk.
 - Requires admin permissions since Gameforge launches NosTale with admin permissions for whatever reason.
+- Requires [.NET 8.0 Desktop Runtime (x86)](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-8.0.6-windows-x86-installer) to be installed on your Computer
 
 ## Main Features:
 
