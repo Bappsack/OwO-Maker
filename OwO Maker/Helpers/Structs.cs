@@ -75,11 +75,6 @@
             public static nint GapSize = 0xE0;
         }
 
-        public class TMessageBoxWidget
-        {
-            public static nint MessageJmp = 0xC;
-        }
-
         public class TMiniGameManager
         {
             public static nint CurrentMinigamePtr = 0xC;
@@ -91,12 +86,18 @@
             public static nint Minigame_5 = 0x80;
             public static nint Minigame_6 = 0x84;
 
+            public static nint TMiniGameDurability = 0x8C;
             public static nint MiniGameID = 0x358;
         }
 
         public class TMiniGamePoints
         {
             public static nint ProductionPoints = 0xC8;
+        }
+
+        public class TMiniGameDurability
+        {
+            public static nint Durability = 0x128;
         }
 
         public class StoneQuarry
