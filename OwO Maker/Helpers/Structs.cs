@@ -160,9 +160,8 @@
             public static nint IsOn = 0x059F;
             public static nint IsVisible = 0x0018;
 
-            public static nint Status = 0x038;
+            public static nint Status = 0x0038;
             public static nint FishEvent = 0x176E;
-            public static nint FishEventFlag = 0x0038;
             public static nint FishData = 0x16E8;
             public static nint bHp = 0x16EC;
             public static nint Points = 0x16F0;
