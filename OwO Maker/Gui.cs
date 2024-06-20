@@ -18,7 +18,7 @@ namespace OwO_Maker
 
         private List<int> HWndList = new List<int>();
         private List<IntPtr> WindowList = new List<IntPtr>();
-        private List<Thread> BotList = new List<Thread>();
+        private List<Tuple<Thread, nint>> BotList = new List<Tuple<Thread, nint>>();
 
         public bool Reset { get; private set; }
         public bool IsStarted { get; private set; }
@@ -185,10 +185,11 @@ namespace OwO_Maker
                 return;
             }
 
-            if ((int)Game == 0) { BotList.Add(new Thread(() => new Minigames.StoneQuarry().RunTask(FindWindow("TNosTaleMainF", Title), Amount, buttons, Convert.ToInt32(BotID), Level, HumanTime.Checked, ProductionCoupon.Checked, failchance, prodkey))); }
-            if ((int)Game == 1) { BotList.Add(new Thread(() => new Minigames.SawMill().RunTask(FindWindow("TNosTaleMainF", Title), Amount, buttons, Convert.ToInt32(BotID), Level, HumanTime.Checked, ProductionCoupon.Checked, failchance, prodkey))); }
-            if ((int)Game == 2) { BotList.Add(new Thread(() => new Minigames.ShootingRange().RunTask(FindWindow("TNosTaleMainF", Title), Amount, buttons, Convert.ToInt32(BotID), Level, HumanTime.Checked, ProductionCoupon.Checked, failchance, prodkey))); }
-            if ((int)Game == 3) { BotList.Add(new Thread(() => new Minigames.FishPond().RunTask(FindWindow("TNosTaleMainF", Title), Amount, buttons, Convert.ToInt32(BotID), Level, HumanTime.Checked, ProductionCoupon.Checked, failchance, prodkey))); }
+
+            if ((int)Game == 0) { BotList.Add(new(new Thread(() => new Minigames.StoneQuarry().RunTask(FindWindow("TNosTaleMainF", Title), Amount, buttons, Convert.ToInt32(BotID), Level, HumanTime.Checked, ProductionCoupon.Checked, failchance, prodkey)), ClientHWND)); }
+            if ((int)Game == 1) { BotList.Add(new(new Thread(() => new Minigames.SawMill().RunTask(FindWindow("TNosTaleMainF", Title), Amount, buttons, Convert.ToInt32(BotID), Level, HumanTime.Checked, ProductionCoupon.Checked, failchance, prodkey)), ClientHWND)); }
+            if ((int)Game == 2) { BotList.Add(new(new Thread(() => new Minigames.ShootingRange().RunTask(FindWindow("TNosTaleMainF", Title), Amount, buttons, Convert.ToInt32(BotID), Level, HumanTime.Checked, ProductionCoupon.Checked, failchance, prodkey)), ClientHWND)); }
+            if ((int)Game == 3) { BotList.Add(new(new Thread(() => new Minigames.FishPond().RunTask(FindWindow("TNosTaleMainF", Title), Amount, buttons, Convert.ToInt32(BotID), Level, HumanTime.Checked, ProductionCoupon.Checked, failchance, prodkey)), ClientHWND)); }
 
             string[] row = { BotID, GetWantedMinigame().ToString(), t_Level.Text, "0", "0", ProductionCoupon.Checked.ToString(), HumanTime.Checked.ToString(), $"0/{t_Times.Text}" };
             var bot = new ListViewItem(row);
@@ -251,8 +252,8 @@ namespace OwO_Maker
             }
 
             int Amount = BotList.Count;
-            foreach (Thread Bot in BotList)
-                Bot.Interrupt();
+            foreach (Tuple<Thread, nint> Bot in BotList)
+                Bot.Item1.Interrupt();
 
             Program.botRunning = false;
             BotList.Clear();
@@ -281,10 +282,9 @@ namespace OwO_Maker
             Invoke(new Action(() =>
             {
                 int Amount = BotList.Count;
-                foreach (Thread Bot in BotList)
-                {
-                    Bot.Start();
-                }
+                foreach (Tuple<Thread, nint> Bot in BotList)
+                    Bot.Item1.Start();
+
                 MessageBox.Show($"{Amount} Bots have been started!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 IsStarted = true;
             }));
@@ -302,6 +302,18 @@ namespace OwO_Maker
                     for (int i = 0; i < item.SubItems.Count; i++)
                         item.SubItems[i].Text = row[i].ToString();
 
+            }));
+        }
+
+        public void RemoveBotFromList(nint botID)
+        {
+            Invoke(new Action(() =>
+            {
+                // Remove from ThreadList
+                BotList.Remove(BotList.Where(x => x.Item2 == botID).FirstOrDefault());
+
+                // Remove from ListView
+                listView1.Items.Remove(FindListViewItemByBotID((int)botID));
             }));
         }
 
