@@ -314,6 +314,10 @@ namespace OwO_Maker
 
                 // Remove from ListView
                 listView1.Items.Remove(FindListViewItemByBotID((int)botID));
+
+
+                if(BotList.Count <= 0)
+                    IsStarted = false;
             }));
         }
 
