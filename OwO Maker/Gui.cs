@@ -285,8 +285,8 @@ namespace OwO_Maker
                 foreach (Tuple<Thread, nint> Bot in BotList)
                     Bot.Item1.Start();
 
-                MessageBox.Show($"{Amount} Bots have been started!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 IsStarted = true;
+                MessageBox.Show($"{Amount} Bots have been started!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }));
 
 
@@ -315,6 +315,8 @@ namespace OwO_Maker
                 // Remove from ListView
                 listView1.Items.Remove(FindListViewItemByBotID((int)botID));
 
+                // Remove from WindowList
+                WindowList.Remove(botID);
 
                 if(BotList.Count <= 0)
                     IsStarted = false;
