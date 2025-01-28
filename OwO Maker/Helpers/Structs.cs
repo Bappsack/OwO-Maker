@@ -72,7 +72,7 @@
             public static nint ArrowJmp1 = 0xFC; // unkwown, vtable?
             public static nint ArrowJmp2 = 0x18; // unkown
 
-            public static nint GapSize = 0xE0;
+            public static nint GapSize = 0xF0;
         }
 
         public class TMiniGameManager
