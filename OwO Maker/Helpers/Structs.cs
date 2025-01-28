@@ -78,26 +78,26 @@
         public class TMiniGameManager
         {
             public static nint CurrentMinigamePtr = 0xC;
-            public static nint CurrentMinigameType = 0x68;
-            public static nint StoneQuarryPtr = 0x70;
-            public static nint SawMillPtr = 0x74;
-            public static nint ShootingRangePtr = 0x78;
-            public static nint FishingPondPtr = 0x7C;
-            public static nint Minigame_5 = 0x80;
-            public static nint Minigame_6 = 0x84;
+            public static nint CurrentMinigameType = 0x70;
+            public static nint StoneQuarryPtr = 0x78;
+            public static nint SawMillPtr = 0x7c;
+            public static nint ShootingRangePtr = 0x80;
+            public static nint FishingPondPtr = 0x84;
+            public static nint Minigame_5 = 0x84;
+            public static nint Minigame_6 = 0x88;
 
-            public static nint TMiniGameDurability = 0x8C;
-            public static nint MiniGameID = 0x358;
+            public static nint TMiniGameDurability = 0x94;
+            //public static nint MiniGameID = 0x358; // TODO: if ever needed, this is outdated and not present anymore in TMiniGameManager as of 28/01/2025
         }
 
         public class TMiniGamePoints
         {
-            public static nint ProductionPoints = 0xC8;
+            public static nint ProductionPoints = 0xD0;
         }
 
         public class TMiniGameDurability
         {
-            public static nint Durability = 0x128;
+            public static nint Durability = 0x130;
         }
 
         public class StoneQuarry

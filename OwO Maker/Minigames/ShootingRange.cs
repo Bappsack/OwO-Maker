@@ -40,7 +40,6 @@ namespace OwO_Maker.Minigames
             while (Program.botRunning)
             {
                 var manager = TMinigameManger;
-                var MiniGameID = (Structs.MinigameID)mem.ReadMemory<uint>(TMinigameManger + Structs.TMiniGameManager.MiniGameID);
                 var productionPoints = mem.ReadMemory<int>(TMiniGamePoints + Structs.TMiniGamePoints.ProductionPoints);
                 var currentMiniGame = mem.ReadMemory<IntPtr>(manager + Structs.TMiniGameManager.CurrentMinigamePtr);
                 var m_iCurrentMiniGame = mem.ReadMemory<byte>(manager + Structs.TMiniGameManager.CurrentMinigameType);
