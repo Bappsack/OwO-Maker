@@ -318,7 +318,7 @@ namespace OwO_Maker
                 // Remove from WindowList
                 WindowList.Remove(botID);
 
-                if(BotList.Count <= 0)
+                if (BotList.Count <= 0)
                     IsStarted = false;
             }));
         }

@@ -116,6 +116,15 @@ namespace OwO_Maker.Helpers
             };
         }
 
+        public static MinigameID GetCurrentMiniGameID(Mem mem)
+        {
+            var TMiniGameManagerPointer = mem.FindPattern(Structs.Pattern.TMiniGameManager) + 1;
+            var TMiniGameManager = (nint)mem.ReadMemory<uint>(TMiniGameManagerPointer);
+            var minigameID = mem.ReadMemory<short>(TMiniGameManager + Structs.TMiniGameManager.MiniGameID);
+
+            return (MinigameID)minigameID;
+        }
+
         public static List<Point?> FindMinigameArrowButton(Mem mem, IntPtr TArrowWidget, ButtonResolution buttons)
         {
             var result = new List<Point?>();
