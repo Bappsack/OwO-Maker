@@ -19,7 +19,8 @@ namespace OwO_Maker.Minigames
 
             mem.Init(proc);
 
-            var TMinigameManger = mem.ReadMemory<IntPtr>(mem.FindPattern(Structs.Pattern.TMiniGameManager) + 1, [0x0]);
+            var TMinigameMangerPointer = mem.ReadMemory<IntPtr>(mem.FindPattern(Structs.Pattern.TMiniGameManager) + 1);
+            var TMiniGameManager = mem.ReadMemory<IntPtr>(TMinigameMangerPointer);
             var TMiniGamePoints = mem.ReadMemory<IntPtr>(mem.FindPattern(Structs.Pattern.TMiniGamePoints) + 1, [0x0]);
             var TArrowWidget = mem.ReadMemory<IntPtr>(mem.FindPattern(Structs.Pattern.TArrowWidget) + 1, [0x0]);
 
@@ -30,7 +31,7 @@ namespace OwO_Maker.Minigames
             if (FailChance <= 0)
                 Fail = false;
 
-            if (TMinigameManger is 0 || TMiniGamePoints is 0 || TArrowWidget is 0)
+            if (TMiniGameManager is 0 || TMiniGamePoints is 0 || TArrowWidget is 0)
             {
                 Program.form.RemoveBotFromList(BotID);
                 MessageBox.Show($"Bot: {BotID} Unable to locate Memory signatures, Abort!");
@@ -39,8 +40,8 @@ namespace OwO_Maker.Minigames
 
             while (Program.botRunning)
             {
-                var manager = TMinigameManger;
-                var MiniGameID = SharedRoutines.GetCurrentMiniGameID(mem);
+                var manager = TMiniGameManager;
+                var MiniGameID = SharedRoutines.GetCurrentMiniGameID(mem, TMinigameMangerPointer);
                 var productionPoints = mem.ReadMemory<int>(TMiniGamePoints + Structs.TMiniGamePoints.ProductionPoints);
                 var currentMiniGame = mem.ReadMemory<IntPtr>(manager + Structs.TMiniGameManager.CurrentMinigamePtr);
                 var m_iCurrentMiniGame = mem.ReadMemory<byte>(manager + Structs.TMiniGameManager.CurrentMinigameType);
@@ -78,22 +79,23 @@ namespace OwO_Maker.Minigames
 
                         if (points < requiredPoints)
                         {
-                            for (nint i = 238; i != (238 - firstHitBox); i--)
+                            for (uint i = 278; i != (278 - firstHitBox); i--)
                             {
                                 if (yellowWigglerleftData[i] != 0 || greenWigglerleftData[i] != 0 || redWigglerleftData[i] != 0 || blueWigglerleftData[i] != 0 || purpleWigglerleftData[i] != 0)
                                 {
                                     await BackgroundHelper.SendKey(hWnd, BackgroundHelper.KeyCodes.VK_LEFT, 0);
+                                    await Task.Delay(2);
                                     break;
                                 }
 
                                 else if (yellowWigglerrightData[i] != 0 || greenWigglerrightData[i] != 0 || redWigglerrightData[i] != 0 || blueWigglerrightData[i] != 0 || purpleWigglerrightData[i] != 0)
                                 {
                                     await BackgroundHelper.SendKey(hWnd, BackgroundHelper.KeyCodes.VK_RIGHT, 0);
+                                    await Task.Delay(2);
                                     break;
                                 }
 
                                 await BackgroundHelper.SendKey(hWnd, BackgroundHelper.KeyCodes.VK_UP, 0);
-                                await Task.Delay(2);
                             }
                         }
                     }
