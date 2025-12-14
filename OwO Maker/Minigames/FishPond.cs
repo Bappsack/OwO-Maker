@@ -81,29 +81,29 @@ namespace OwO_Maker.Minigames
 
                         if (fishData[0] < 3 && points < requiredPoints)
                         {
-                            await BackgroundHelper.SendKey(hWnd, BackgroundHelper.KeyCodes.VK_LEFT, fishData[0] is 2 ? 100 : HumanTime ? 10 : 450);
-                            if (HumanTime) { await Task.Delay(450); }
+                            await BackgroundHelper.SendKey(hWnd, BackgroundHelper.KeyCodes.VK_LEFT, fishData[0] is 2 ? 100 : HumanTime ? 50 : 450);
+                            await Task.Delay(HumanTime ? 250 : 50);
                             continue;
                         }
 
                         if (fishData[1] < 3 && points < requiredPoints)
                         {
-                            await BackgroundHelper.SendKey(hWnd, BackgroundHelper.KeyCodes.VK_DOWN, fishData[1] is 2 ? 100 : HumanTime ? 10 : 450);
-                            if (HumanTime) { await Task.Delay(450); }
+                            await BackgroundHelper.SendKey(hWnd, BackgroundHelper.KeyCodes.VK_DOWN, fishData[1] is 2 ? 100 : HumanTime ? 50 : 450);
+                            await Task.Delay(HumanTime ? 250 : 50);
                             continue;
                         }
 
                         if (fishData[2] < 3 && points < requiredPoints)
                         {
-                            await BackgroundHelper.SendKey(hWnd, BackgroundHelper.KeyCodes.VK_UP, fishData[2] is 2 ? 100 : HumanTime ? 10 : 450);
-                            if (HumanTime) { await Task.Delay(450); }
+                            await BackgroundHelper.SendKey(hWnd, BackgroundHelper.KeyCodes.VK_UP, fishData[2] is 2 ? 100 : HumanTime ? 50 : 450);
+                            await Task.Delay(HumanTime ? 250 : 50);
                             continue;
                         }
 
                         if (fishData[3] < 3 && points < requiredPoints)
                         {
-                            await BackgroundHelper.SendKey(hWnd, BackgroundHelper.KeyCodes.VK_RIGHT, fishData[3] is 2 ? 100 : HumanTime ? 10 : 450);
-                            if (HumanTime) { await Task.Delay(450); }
+                            await BackgroundHelper.SendKey(hWnd, BackgroundHelper.KeyCodes.VK_RIGHT, fishData[3] is 2 ? 100 : HumanTime ? 50 : 450);
+                            await Task.Delay(HumanTime ? 250 : 50);
                             continue;
                         }
                     }
